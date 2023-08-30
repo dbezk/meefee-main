@@ -1,4 +1,4 @@
-package com.meefee.main.service;
+package com.meefee.main.service.shared;
 
 import com.meefee.main.dto.NewAccountDTO;
 

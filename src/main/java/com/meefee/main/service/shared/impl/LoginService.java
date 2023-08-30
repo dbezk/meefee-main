@@ -1,7 +1,8 @@
-package com.meefee.main.service;
+package com.meefee.main.service.shared.impl;
 
 import com.meefee.main.model.artist.Artist;
 import com.meefee.main.repository.ArtistRepository;
+import com.meefee.main.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -18,11 +19,19 @@ import java.util.Collection;
 public class LoginService implements UserDetailsService {
 
     private final ArtistRepository artistRepository;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Artist artist = artistRepository.findByEmail(email);
-        if(artist != null) {
+        com.meefee.main.model.user.User user = userRepository.findByEmail(email);
+        if(user != null) {
+            Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+            user.getRoles().forEach(role -> {
+                authorities.add(new SimpleGrantedAuthority(role.getName()));
+            });
+            return new User(email, user.getPassword(), authorities);
+        } else if(artist != null) {
             Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
             artist.getRoles().forEach(role -> {
                 authorities.add(new SimpleGrantedAuthority(role.getName()));

@@ -1,5 +1,6 @@
 package com.meefee.main.config;
 
+import com.meefee.main.constants.Roles;
 import com.meefee.main.filter.AuthenticationFilter;
 import com.meefee.main.filter.AuthorizationFilter;
 import com.meefee.main.utils.jwt.JWTUtils;
@@ -13,6 +14,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,7 +27,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 @RequiredArgsConstructor
 public class SecurityConfig {
 
@@ -47,7 +49,8 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(Customizer.withDefaults());
+        http.csrf(AbstractHttpConfigurer::disable);
+        http.cors(AbstractHttpConfigurer::disable);
         AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManagerBuilder.getOrBuild(), jwtUtils);
         authenticationFilter.setFilterProcessesUrl("/api/login");
         http.sessionManagement((sessionManagement) -> {
@@ -56,9 +59,9 @@ public class SecurityConfig {
             });
         });
         http.authorizeHttpRequests((authorizeHttpRequests) -> {
-            authorizeHttpRequests.requestMatchers("/api/login/**", "/api/login").permitAll();
-            authorizeHttpRequests.requestMatchers("/api/person/**").hasRole("SIMPLE_USER");
-            authorizeHttpRequests.requestMatchers("/api/admin/**").hasRole("ADMIN_USER");
+            authorizeHttpRequests.requestMatchers("/api/login", "/api/register/*").permitAll();
+            authorizeHttpRequests.requestMatchers("/api/artist/**").hasAuthority(Roles.ARTIST_ROLE);
+            authorizeHttpRequests.requestMatchers("/api/user/**").hasAuthority(Roles.USER_ROLE);
             authorizeHttpRequests.anyRequest().authenticated();
         });
         http.addFilter(authenticationFilter);
@@ -70,7 +73,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration corsConfiguration = new CorsConfiguration();
 
-        corsConfiguration.addAllowedOrigin(corsAllowOrigin);
+        corsConfiguration.addAllowedOriginPattern(corsAllowOrigin);
         corsConfiguration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE"));
         corsConfiguration.setAllowCredentials(true);
         corsConfiguration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Cache-Control"));

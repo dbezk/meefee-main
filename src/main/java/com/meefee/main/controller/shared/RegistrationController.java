@@ -1,7 +1,7 @@
 package com.meefee.main.controller.shared;
 
 import com.meefee.main.dto.NewAccountDTO;
-import com.meefee.main.service.RegistrationService;
+import com.meefee.main.service.shared.RegistrationService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

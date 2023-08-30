@@ -20,7 +20,7 @@ public class ArtistSettingsServiceImpl implements ArtistSettingsService {
     @Override
     public void changePassword(AccountSettingsDTO accountSettingsDTO) {
         Artist artist = artistRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
-        artist.setPassword(passwordEncoder.encode(accountSettingsDTO.getPassword()));
+        artist.setPassword(passwordEncoder.encode(accountSettingsDTO.getPasswords().getPassword()));
         artistRepository.save(artist);
     }
 

@@ -4,7 +4,7 @@ import com.meefee.main.constants.Roles;
 import com.meefee.main.dto.NewAccountDTO;
 import com.meefee.main.model.Role;
 import com.meefee.main.repository.RoleRepository;
-import com.meefee.main.service.RegistrationService;
+import com.meefee.main.service.shared.RegistrationService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,7 +25,7 @@ public class MainApplication {
 			roleRepository.save(new Role(Roles.ARTIST_ROLE));
 			roleRepository.save(new Role(Roles.USER_ROLE));
 
-			registrationService.registerUser(new NewAccountDTO("alex@laradov.com", "password123"));
+			registrationService.registerArtist(new NewAccountDTO("alex@laradov.com", "password123"));
 			registrationService.registerUser(new NewAccountDTO("nikita@volant.com", "password123"));
 		};
 	}

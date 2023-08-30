@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/api/artist/settings")
 @RequiredArgsConstructor
-public class AccountSettingsController {
+public class ArtistAccountSettingsController {
 
     private final ArtistSettingsService artistSettingsService;
 
-    @PatchMapping(value = "/password")
+    @PatchMapping(value = "/changePassword")
     public ResponseEntity<?> changePassword(@Valid AccountSettingsDTO accountSettingsDTO) {
         artistSettingsService.changePassword(accountSettingsDTO);
         return ResponseEntity.ok().build();

@@ -33,7 +33,8 @@ public class JWTUtils {
                 .withSubject(subject)
                 .withIssuer(issuerURL)
                 .withClaim("roles", authorityCollection.stream().map(GrantedAuthority::getAuthority).toList())
-                .withExpiresAt(Date.from(LocalDateTime.now().plusDays(5).toInstant(ZoneOffset.UTC)))
+//                .withExpiresAt(Date.from(LocalDateTime.now().plusDays(5).toInstant(ZoneOffset.UTC)))
+                .withExpiresAt(new Date(System.currentTimeMillis() + 12 * 60 * 60 * 1000))
                 .sign(getJwtAlgorithm());
     }
 

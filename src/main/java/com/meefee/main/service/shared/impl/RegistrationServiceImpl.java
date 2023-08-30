@@ -1,4 +1,4 @@
-package com.meefee.main.service.impl;
+package com.meefee.main.service.shared.impl;
 
 import com.meefee.main.constants.Roles;
 import com.meefee.main.dto.NewAccountDTO;
@@ -9,7 +9,7 @@ import com.meefee.main.model.user.User;
 import com.meefee.main.repository.ArtistRepository;
 import com.meefee.main.repository.RoleRepository;
 import com.meefee.main.repository.UserRepository;
-import com.meefee.main.service.RegistrationService;
+import com.meefee.main.service.shared.RegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     public void registerArtist(NewAccountDTO newAccountDTO) {
         Role artistRole = roleRepository.findByName(Roles.ARTIST_ROLE);
-        Artist artist = RegistrationMapper.mapToArtist(newAccountDTO);
+        Artist artist = RegistrationMapper.mapDtoToArtist(newAccountDTO);
         artist.setPassword(passwordEncoder.encode(artist.getPassword()));
         artist.setRoles(Collections.singletonList(artistRole));
         artist.setActivated(false);
@@ -43,7 +43,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     public void registerUser(NewAccountDTO newAccountDTO) {
         Role userRole = roleRepository.findByName(Roles.USER_ROLE);
-        User user = RegistrationMapper.mapToUser(newAccountDTO);
+        User user = RegistrationMapper.mapDtoToUser(newAccountDTO);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Collections.singletonList(userRole));
         user.setActivated(false);
