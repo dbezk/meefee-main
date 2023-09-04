@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface PasswordsMatch {
 
-    String message() default "Password don't match";
+    String message() default "Passwords must match.";
 
     Class<?>[] groups() default {};
 

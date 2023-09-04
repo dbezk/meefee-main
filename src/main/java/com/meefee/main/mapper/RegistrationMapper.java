@@ -1,6 +1,6 @@
 package com.meefee.main.mapper;
 
-import com.meefee.main.dto.NewAccountDTO;
+import com.meefee.main.dto.register.NewAccountDTO;
 import com.meefee.main.model.artist.Artist;
 import com.meefee.main.model.user.User;
 

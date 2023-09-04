@@ -4,6 +4,6 @@ import com.meefee.main.model.artist.ArtistSingle;
 
 public interface SinglesService {
 
-    ArtistSingle findSingleByUSI(String USI);
+    ArtistSingle getSingleById(Long id);
 
 }

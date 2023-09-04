@@ -11,7 +11,7 @@ public class PasswordsMatchValidator implements ConstraintValidator<PasswordsMat
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         if(value instanceof NewPasswordDTO) {
             NewPasswordDTO dto = (NewPasswordDTO) value;
-            return dto.getPassword() != null && dto.getPassword().equals(dto.getRetryPassword());
+            return dto.getNewPassword() != null && dto.getNewPassword().equals(dto.getRetryNewPassword());
         }
         return false;
     }

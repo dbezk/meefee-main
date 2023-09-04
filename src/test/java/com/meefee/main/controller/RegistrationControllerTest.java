@@ -1,7 +1,7 @@
 package com.meefee.main.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.meefee.main.dto.NewAccountDTO;
+import com.meefee.main.dto.register.NewAccountDTO;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

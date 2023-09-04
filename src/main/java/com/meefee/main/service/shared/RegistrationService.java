@@ -1,6 +1,6 @@
 package com.meefee.main.service.shared;
 
-import com.meefee.main.dto.NewAccountDTO;
+import com.meefee.main.dto.register.NewAccountDTO;
 
 public interface RegistrationService {
 

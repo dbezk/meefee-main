@@ -38,7 +38,7 @@ public class ArtistSingle {
 
     private LocalDateTime releaseDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     private Artist artist;
 
@@ -49,9 +49,5 @@ public class ArtistSingle {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "single")
     @JsonIgnore
     private Collection<ListeningStream> listeningStreams;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "single")
-    @JsonIgnore
-    private Collection<FavoriteSingle> singleFavoritedCollection;
 
 }

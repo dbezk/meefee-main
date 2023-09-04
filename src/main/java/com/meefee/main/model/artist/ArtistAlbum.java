@@ -1,9 +1,6 @@
 package com.meefee.main.model.artist;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.meefee.main.model.shared.ListeningStream;
-import com.meefee.main.model.user.FavoriteAlbum;
-import com.meefee.main.model.user.FavoriteSingle;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,9 +41,5 @@ public class ArtistAlbum {
     @ManyToOne
     @JsonIgnore
     private Artist artist;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "album")
-    @JsonIgnore
-    private Collection<FavoriteAlbum> albumFavoritedCollection;
 
 }

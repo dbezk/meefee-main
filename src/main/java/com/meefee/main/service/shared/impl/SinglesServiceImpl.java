@@ -13,7 +13,7 @@ public class SinglesServiceImpl implements SinglesService {
     private final ArtistSingleRepository artistSingleRepository;
 
     @Override
-    public ArtistSingle findSingleByUSI(String USI) {
-        return null;
+    public ArtistSingle getSingleById(Long id) {
+        return artistSingleRepository.findById(id).orElse(null);
     }
 }

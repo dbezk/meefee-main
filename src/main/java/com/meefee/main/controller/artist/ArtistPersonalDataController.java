@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArtistPersonalDataController {
 
     private final ArtistsService artistsService;
-
     @GetMapping
     public ResponseEntity<Artist> getFullPersonalData() {
         Artist artist = artistsService.getCurrentArtist();

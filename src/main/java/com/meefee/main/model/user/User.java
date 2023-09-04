@@ -1,6 +1,7 @@
 package com.meefee.main.model.user;
 
 import com.meefee.main.model.Role;
+import com.meefee.main.model.artist.ArtistSingle;
 import com.meefee.main.model.shared.ListeningStream;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -50,8 +51,5 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private Collection<FavoriteSingle> favoriteSingles;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private Collection<FavoriteAlbum> favoriteAlbums;
 
 }

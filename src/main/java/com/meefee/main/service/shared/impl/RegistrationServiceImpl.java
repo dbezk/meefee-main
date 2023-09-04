@@ -1,7 +1,7 @@
 package com.meefee.main.service.shared.impl;
 
 import com.meefee.main.constants.Roles;
-import com.meefee.main.dto.NewAccountDTO;
+import com.meefee.main.dto.register.NewAccountDTO;
 import com.meefee.main.mapper.RegistrationMapper;
 import com.meefee.main.model.Role;
 import com.meefee.main.model.artist.Artist;

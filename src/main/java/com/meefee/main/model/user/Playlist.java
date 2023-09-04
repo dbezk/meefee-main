@@ -1,6 +1,7 @@
 package com.meefee.main.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.meefee.main.model.artist.ArtistSingle;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Entity
 @AllArgsConstructor
@@ -24,8 +26,7 @@ public class Playlist {
 
     private LocalDateTime createdAt;
 
-    @ManyToOne
-    @JsonIgnore
-    private User user;
+    @OneToMany(fetch = FetchType.LAZY)
+    private Collection<ArtistSingle> singles;
 
 }
