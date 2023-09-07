@@ -1,6 +1,7 @@
 package com.meefee.main.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.meefee.main.constants.CustomFields;
 import com.meefee.main.utils.jwt.JWTUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -15,7 +16,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -43,7 +43,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         String issuerURL = request.getRequestURL().toString();
         String accessToken = jwtUtils.generateAccessToken(user.getUsername(), issuerURL, user.getAuthorities());
         Map<String, String> token = new HashMap<>();
-        token.put("accessToken", accessToken);
+        token.put(CustomFields.ACCESS_TOKEN, accessToken);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), token);
     }

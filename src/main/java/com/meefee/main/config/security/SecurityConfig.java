@@ -1,4 +1,4 @@
-package com.meefee.main.config;
+package com.meefee.main.config.security;
 
 import com.meefee.main.constants.Roles;
 import com.meefee.main.filter.AuthenticationFilter;
